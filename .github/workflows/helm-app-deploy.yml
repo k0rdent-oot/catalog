@@ -214,6 +214,13 @@ jobs:
         run: |
           export APP=${{ matrix.folder }}
           export TEST_MODE=local
+          export GITHUB_EVENT_NAME="${{ github.event_name }}"
+          export GITHUB_PR_HEAD_REPO_OWNER="${{ github.event.pull_request.head.repo.owner.login }}"
+          export GITHUB_PR_HEAD_REPO_NAME="${{ github.event.pull_request.head.repo.name }}"
+          export GITHUB_REPOSITORY="${{ github.repository }}"
+          export GITHUB_REPOSITORY_OWNER="${{ github.repository_owner }}"
+          export GITHUB_EVENT_REPOSITORY_NAME="${{ github.event.repository.name }}"
+          export GITHUB_REF="${{ github.ref }}"
           ./scripts/deploy_mcs.sh
 
       - name: Test - Uninstall MultiClusterDeployment
